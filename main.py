@@ -54,7 +54,6 @@ class CatFramework(BaseHTTPRequestHandler):
         with open(filename, "rb") as f:
             self.wfile.write(f.read())
 
-
     def send_static(self, filename, status=200):
         self.send_response(status)
         mimetype = mimetypes.guess_type(filename)[0] if mimetypes.guess_type(filename)[0] else "text/plain"
@@ -116,8 +115,8 @@ def run_socket_server():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(threadName)s - %(message)s")
-    http_thread = Process(target=run_http_server, name="http_server")
-    http_thread.start()
+    http_process = Process(target=run_http_server, name="http_server")
+    http_process.start()
 
-    socket_thread = Process(target=run_socket_server, name="socket_server")
-    socket_thread.start()
+    socket_process = Process(target=run_socket_server, name="socket_server")
+    socket_process.start()
